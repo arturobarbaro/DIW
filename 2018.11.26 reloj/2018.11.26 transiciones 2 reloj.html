@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title></title>
+        <style media="screen">
+            #esfera,#segundero,#minutero,#horario {
+                height: 225px;
+                width: 225px;
+                position: absolute
+            }
+            #esfera {
+                i-index: 1
+            }
+            #segundero {
+                i-index: 2
+                transition: transform 60s linear;
+            }
+            #minutero {
+                i-index: 3
+                transition: transform 360s linear;
+            }
+            #horario {
+                i-index: 4
+                transition: transform 8640s linear;
+            }
+            #horario:active,#minutero:active,#segundero:active{
+                transform: rotate(360deg);
+            }
+        </style>
+        <script type="text/javascript">
+            var degs=0;
+            var degm=0;
+            var degh=0;
+            //alert(h);
+            setInterval(function(){
+                degs+=6;
+                segundero.style.transform=`rotate(${degs}deg)`
+                degm+=6/60;
+                minutero.style.transform=`rotate(${degm}deg)`
+                degh+=0.1/12;
+                horario.style.transform=`rotate(${degh}deg)`
+            }, 1000);
+        </script>
+    </head>
+    <body>
+        <div class="reloj">
+            <img id="esfera" src="reloj.jpg">
+            <img id="segundero" src="segundero.png">
+            <img id="minutero" src="minutero.png">
+            <img id="horario" src="horario.png">
+        </div>
+        <br>
+    </body>
+</html>

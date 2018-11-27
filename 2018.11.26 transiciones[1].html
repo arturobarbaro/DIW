@@ -14,11 +14,33 @@
             -webkit-transform: matrix(1, 0, 0.5, 1, 150, 0); /* Safari */
             transform: matrix(1, 0, 0.5, 1, 150, 0);
         }
+
+        button:hover.class4{
+            border: 1px solid black;
+            -ms-transform: scale(2,3); /* IE 9 */
+            -webkit-transform: scale(2,3); /* Safari */
+            transform: scale(2,3);
+        }
+
+        button:hover.class5{
+            -ms-transform: skewY(20deg); /* IE 9 */
+            -webkit-transform: skewY(20deg); /* Safari */
+            transform: skewY(20deg); /* Standard syntax */
+        }
+
+        button:hover.class6{
+            -ms-transform: skewX(20deg); /* IE 9 */
+            -webkit-transform: skewX(20deg); /* Safari */
+            transform: skewX(20deg); /* Standard syntax */
+        }
     </style>
 </head>
 <body>
     <button class="class1" type="button" name="button">Rota 20º al situar</button>
     <button class="class2" type="button" name="button">Cambia el ancho al clickear</button>
-    <button class="class3" type="button" name="button">SkeyX</button>
+    <button class="class3" type="button" name="button">Matrix</button>
+    <button class="class4" type="button" name="button">scale</button>
+    <button class="class5" type="button" name="button">skewY</button>
+    <button class="class6" type="button" name="button">skewX</button>
 </body>
 </html>
