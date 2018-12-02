@@ -1,66 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <title></title>
-        <style media="screen">
-            .di{
-                height:20%;
-                width:20%;
-                left: 200%;
-                top: 200%;
-                position: absolute;
+<head>
+    <title></title>
+    <style media="screen">
+    .di{
+        height:20%;
+        width:20%;
+        left: 200%;
+        top: 200%;
+        position: absolute;
+    }
+    .reloj {
+        height: 225px;
+        width: 225px;
+        position: absolute;
+    }
+    #esfera {
+        i-index: 1
+    }
+    #segundero {
+        i-index: 2
+    }
+    #minutero {
+        i-index: 3
+    }
+    #horario {
+        i-index: 4
+    }
+    #horario:active,#minutero:active,#segundero:active{
+        transform: rotate(360deg);
+    }
+    </style>
+    <script type="text/javascript">
+    function eliminarBoton(){
+                var b = document.getElementById("botones").getElementsByTagName('button');
+                document.getElementById("botones").removeChild(b[b.length-1]);
             }
-            .reloj {
-                height: 225px;
-                width: 225px;
-                position: absolute;
-            }
-            #esfera {
-                i-index: 1
-            }
-            #segundero {
-                i-index: 2
-            }
-            #minutero {
-                i-index: 3
-            }
-            #horario {
-                i-index: 4
-            }
-            #horario:active,#minutero:active,#segundero:active{
-                transform: rotate(360deg);
-            }
-        </style>
-        <script type="text/javascript">
-            var d=new Date();
-            var segundos = d.getSeconds();
-            var minutos= d.getMinutes()
-            var horas = (d.getHours()*60+d.getMinutes())/60;
-            var degs=6*segundos;
-            var degm=6*minutos+degs*1/60;
-            var degh=(360/12)*horas;
-            setInterval(function(){
-                degs+=0.06;
-                segundero.style.transform=`rotate(${degs}deg)`
-                degm+=0.06/60;
-                minutero.style.transform=`rotate(${degm}deg)`
-                degh+=(0.001/12);
-                horario.style.transform=`rotate(${degh}deg)`
-            }, 10);
-            setTimeout(function(){
-                document.getElementById('esfera').setAttribute("class","di");
-                document.getElementById('segundero').setAttribute("class","di");
-                document.getElementById('minutero').setAttribute("class","di");
-                document.getElementById('horario').setAttribute("class","di");
-            }, 1000);
-        </script>
-    </head>
-    <body>
-        <div id="d" class="reloj">
-            <img id="esfera" class="reloj" src="reloj.jpg">
-            <img id="segundero" class="reloj" src="segundero.png">
-            <img id="minutero" class="reloj" src="minutero.png">
-            <img id="horario" class="reloj" src="horario.png">
-        </div>
-    </body>
+    function actualizar(){
+        degs+=0.06;
+        segundero.style.transform=`rotate(${degs}deg)`
+        degm+=0.06/60;
+        minutero.style.transform=`rotate(${degm}deg)`
+        degh+=(0.001/12);
+        horario.style.transform=`rotate(${degh}deg)`
+    }
+    function minimizar(){
+        document.getElementById('esfera').setAttribute("class","di");
+        document.getElementById('segundero').setAttribute("class","di");
+        document.getElementById('minutero').setAttribute("class","di");
+        document.getElementById('horario').setAttribute("class","di");
+        eliminarBoton();
+        var b=document.createElement('button');
+        var texto = document.createTextNode(`Cambiar tamaño`);
+        b.appendChild(texto);
+        b.addEventListener('click',maximizar)
+        document.getElementById('botones').appendChild(b);
+    }
+    function maximizar(){
+        document.getElementById('esfera').setAttribute("class","reloj");
+        document.getElementById('segundero').setAttribute("class","reloj");
+        document.getElementById('minutero').setAttribute("class","reloj");
+        document.getElementById('horario').setAttribute("class","reloj");
+        eliminarBoton();
+        var b=document.createElement('button');
+        var texto = document.createTextNode(`Cambiar tamaño`);
+        b.appendChild(texto);
+        b.addEventListener('click',minimizar)
+        document.getElementById('botones').appendChild(b);
+
+    }
+    function horaActual(){
+        clearInterval(intervalo);
+        var d=new Date();
+        var segundos = d.getSeconds();
+        var minutos= d.getMinutes()
+        var horas = (d.getHours()*60+d.getMinutes())/60;
+        degs=6*segundos;
+        degm=6*minutos+degs*1/60;
+        degh=(360/12)*horas;
+        setInterval(actualizar, 10);
+        setTimeout(minimizar, 1000);
+    }
+    degs = 0;
+    degm = 0;
+    degh = 0;
+    var intervalo = setInterval(actualizar, 10);
+    window.onload = function(){
+        boton.addEventListener('click',horaActual);
+    }
+    </script>
+
+</head>
+<body>
+    <div id="botones" class="row">
+        <button type="button" id="boton" name="button">Hora actual</button>
+    </div>
+    <div id="d" class="reloj">
+        <img id="esfera" class="reloj" src="reloj.jpg">
+        <img id="segundero" class="reloj" src="segundero.png">
+        <img id="minutero" class="reloj" src="minutero.png">
+        <img id="horario" class="reloj" src="horario.png">
+    </div>
+</body>
 </html>
