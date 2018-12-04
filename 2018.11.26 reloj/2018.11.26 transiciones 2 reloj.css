@@ -1,0 +1,32 @@
+.di{
+    height:10%;
+    width:(16*10%)/9;
+    left: 600px;
+    top: 100%;
+    position: absolute;
+}
+.reloj {
+    height: 60%;
+    width: (16*60%)/9;
+    left: 10%;
+    position: absolute;
+}
+#milisegundero {
+    i-index: 1
+}
+#segundero {
+    i-index: 2
+}
+#minutero {
+    i-index: 3
+}
+#horario {
+    i-index: 4
+}
+
+#esfera {
+    i-index: 5
+}
+#horario:active,#minutero:active,#segundero:active,#milisegundero:active{
+    transform: rotate(360deg) linear;
+}

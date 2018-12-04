@@ -2,96 +2,8 @@
 <html lang="es">
 <head>
     <title></title>
-    <style media="screen">
-    .di{
-        height:10%;
-        width:(16*10%)/9;
-        left: 600px;
-        top: 100%;
-        position: absolute;
-    }
-    .reloj {
-        height: 60%;
-        width: (16*60%)/9;
-        left: 10%;
-        position: absolute;
-    }
-    #segundero {
-        i-index: 2
-    }
-    #minutero {
-        i-index: 3
-    }
-    #horario {
-        i-index: 4
-    }
-
-    #esfera {
-        i-index: 5
-    }
-    #horario:active,#minutero:active,#segundero:active{
-        transform: rotate(360deg) linear;
-    }
-    </style>
-    <script type="text/javascript">
-    function eliminarBoton(){
-        var b = document.getElementById("botones").getElementsByTagName('button');
-        document.getElementById("botones").removeChild(b[b.length-1]);
-    }
-    function actualizar(){
-        degs+=0.06;
-        segundero.style.transform=`rotate(${degs}deg)`
-        degm+=0.06/60;
-        minutero.style.transform=`rotate(${degm}deg)`
-        degh+=(0.001/12);
-        horario.style.transform=`rotate(${degh}deg)`
-    }
-    function minimizar(){
-        document.getElementById('esfera').setAttribute("class","di");
-        document.getElementById('segundero').setAttribute("class","di");
-        document.getElementById('minutero').setAttribute("class","di");
-        document.getElementById('horario').setAttribute("class","di");
-        eliminarBoton();
-        var b=document.createElement('button');
-        var texto = document.createTextNode(`Cambiar tamaño`);
-        b.appendChild(texto);
-        b.addEventListener('click',maximizar)
-        document.getElementById('botones').appendChild(b);
-    }
-    function maximizar(){
-        document.getElementById('esfera').setAttribute("class","reloj");
-        document.getElementById('segundero').setAttribute("class","reloj");
-        document.getElementById('minutero').setAttribute("class","reloj");
-        document.getElementById('horario').setAttribute("class","reloj");
-        eliminarBoton();
-        var b=document.createElement('button');
-        var texto = document.createTextNode(`Cambiar tamaño`);
-        b.appendChild(texto);
-        b.addEventListener('click',minimizar)
-        document.getElementById('botones').appendChild(b);
-    }
-    function horaActual(){
-        clearInterval(intervalo);
-        var d=new Date();
-        var segundos = d.getSeconds();
-        var minutos= d.getMinutes()
-        var horas = (d.getHours()*60+d.getMinutes())/60;
-        degs=6*segundos;
-        degm=6*minutos+degs*1/60;
-        degh=(360/12)*horas;
-        setInterval(actualizar, 10);
-        setTimeout(minimizar, 10000);
-    }
-
-    var intervalo = setInterval(actualizar, 10);
-    window.onload = function(){
-        degs = 0;
-        degm = 0;
-        degh = 0;
-        intervalo;
-        boton.addEventListener('click',horaActual);
-    }
-    </script>
+    <link rel="stylesheet" href="2018.11.26 transiciones 2 reloj.css">
+    <script src="2018.11.26 transiciones 2 reloj.js" charset="utf-8"></script>
 
 </head>
 <body>
@@ -100,6 +12,7 @@
     </div>
     <div id="d" class="reloj">
         <img id="esfera" class="reloj" src="reloj.jpg">
+        <img id="milisegundero" class="reloj" src="milisegundero.png">
         <img id="segundero" class="reloj" src="segundero.png">
         <img id="minutero" class="reloj" src="minutero.png">
         <img id="horario" class="reloj" src="horario.png">
