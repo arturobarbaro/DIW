@@ -2,8 +2,8 @@
  * Funcion encargada de elmininar el boton encargado de Cambiar la poscion del reloj
  */
 function eliminarBoton(){
-    var b = document.getElementById("botones").getElementsByTagName('button');
-    document.getElementById("botones").removeChild(b[b.length-1]);
+    var b = botones.getElementsByTagName('button');
+    botones.removeChild(b[b.length-1]);
 }
 /**
  * Funcion encargada de rotar cada manecilla, de forma que sean directamente proporcionales
@@ -24,34 +24,34 @@ function actualizar(){
  * "cambiar tamaño" para que al clickear sobre el llame a maximizar()
  */
 function minimizar(){
-    document.getElementById('esfera').setAttribute("class","di");
-    document.getElementById('milisegundero').setAttribute("class","di");
-    document.getElementById('segundero').setAttribute("class","di");
-    document.getElementById('minutero').setAttribute("class","di");
-    document.getElementById('horario').setAttribute("class","di");
+    esfera.setAttribute("class","di");
+    milisegundero.setAttribute("class","di");
+    segundero.setAttribute("class","di");
+    minutero.setAttribute("class","di");
+    horario.setAttribute("class","di");
     eliminarBoton();
     var b=document.createElement('button');
     var texto = document.createTextNode(`Cambiar tamaño`);
     b.appendChild(texto);
     b.addEventListener('click',maximizar)
-    document.getElementById('botones').appendChild(b);
+    botones.appendChild(b);
 }
 /**
  * Asigna al conjunto formado por el reloj la clase CSS reloj y modifica el boton
  * "cambiar tamaño" para que al clickear sobre el llame a minimizar()
  */
 function maximizar(){
-    document.getElementById('esfera').setAttribute("class","reloj");
-    document.getElementById('milisegundero').setAttribute("class","reloj");
-    document.getElementById('segundero').setAttribute("class","reloj");
-    document.getElementById('minutero').setAttribute("class","reloj");
-    document.getElementById('horario').setAttribute("class","reloj");
+    esfera.setAttribute("class","reloj");
+    milisegundero.setAttribute("class","reloj");
+    segundero.setAttribute("class","reloj");
+    minutero.setAttribute("class","reloj");
+    horario.setAttribute("class","reloj");
     eliminarBoton();
     var b=document.createElement('button');
     var texto = document.createTextNode(`Cambiar tamaño`);
     b.appendChild(texto);
     b.addEventListener('click',minimizar)
-    document.getElementById('botones').appendChild(b);
+    botones.appendChild(b);
 }
 /**
  * Se encarga de asignar a cada manecilla el instante horario actual correspondiente.
@@ -65,7 +65,7 @@ function horaActual(){
     var minutos= d.getMinutes()
     var horas = (d.getHours()*60+d.getMinutes())/60;
     degms=360*milisegundos;
-    degs=6*segundos+degms*1/1000;
+    degs=6*segundos;
     degm=6*minutos+degs*1/60;
     degh=(360/12)*horas;
     setInterval(actualizar, 10);
@@ -78,7 +78,7 @@ degm = 0;
 degh = 0;
 var intervalo = setInterval(actualizar, 10);
 /**
- * Agidnamos los eventos
+ * Asignamos los eventos
  */
 window.onload = function(){
     boton.addEventListener('click',horaActual);
