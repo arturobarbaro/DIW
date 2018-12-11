@@ -33,7 +33,7 @@ function minimizar(){
     var b=document.createElement('button');
     var texto = document.createTextNode(`Cambiar tamaño`);
     b.appendChild(texto);
-    b.addEventListener('click',maximizar)
+    b.addEventListener('click',maximizar);
     botones.appendChild(b);
 }
 /**
