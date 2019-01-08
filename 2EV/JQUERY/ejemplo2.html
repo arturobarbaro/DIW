@@ -1,0 +1,47 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Añadir y quitar clases CSS a elementos</title>
+    <script src="jquery.js"></script>
+    <script type="text/javascript">
+        window.onload=function(){
+
+        }
+    </script>
+    <style type="text/css">
+        .clasecss{
+            background-color: #ff8800;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $("#b1").click(function(event){
+                $("#capa").addClass("clasecss");
+                // $(function(){
+                //     alert("Juana")
+                // });
+            });
+            $("#b2").click(function(event){
+                $("#capa").removeClass("clasecss");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="capa">
+        Esta capa es independiente y voy a añadir y eliminar clases css sobre ella
+    </div>
+    <br>
+    <br>
+    <button id="b1" type="button" name="button">Añadir</button>
+    <button id="b2" type="button" name="button">Quitar</button>
+    <!-- <a href="http://www.desarrolloweb.com">Añadir y quitar clase en la capa de arriba</a> -->
+</body>
+</html>
+
+</head>
+<body>
+
+</body>
+</html>
