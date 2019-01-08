@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="jquery.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            window.onload = function(){
+                $("#capa").mouseenter(function(evento){
+                    $("#mensaje").css("display", "block");
+                });
+                $("#capa").mouseleave(function(evento){
+                    $("#mensaje").css("display", "none");
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="capa" style="padding: 10px; background-color: #ff8800;">Pon el ratón encima de esta capa</div><br>
+        <div id="mensaje" style="display: none;">Has puesto el ratón encima!! <br>(Ahora quítalo de la capa)</div>
+    </body>
+</html>
