@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+            div{
+                max-width: 500px;
+                margin: auto;
+                border: 3px solid #73AD21;
+            }
+        </style>
+        <script src="jquery.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function(){
+                $("#d").click(function(){
+    	            $("body").animate({backgroundPositionY:"300px"},3001,function() {alert ('Efecto terminado!');}),
+                    $('#d').hide(3000);
+                    $('#d').show(6000);
+                });
+                $("#d").mouseenter(function(){
+			        $('#d').show(3000);
+                    $("#d").css({'background-color': "red"});
+		        });
+                $("#d").fadeOut(3000, function(){
+                    $("#d").css({'top': 300, 'left':200});
+                    $("#d").fadeIn(1000);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="d"></div>
+    </body>
+</html>
