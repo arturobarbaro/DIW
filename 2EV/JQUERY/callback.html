@@ -12,20 +12,44 @@
         </style>
         <script src="jquery.js" type="text/javascript"></script>
         <script>
+            /**
+             * Oculta el elemento, muestra un mensaje, y vulve a hacer visible el elemento
+             * @return {[type]} [description]
+             */
+            function funcion1(){
+                //funcion alert como parametro de la funcion animate().
+                //el mensaje se mostrará con un retarso de 3001 ms
+                $("body").animate({backgroundPositionY:"300px"},3001,
+                    function(){alert ('Se comenzara a mostrar de nuevo!');}),
+                //ocultamos el elemento DOM con un intervalo de 3000ms
+                $('#d').hide(3000);
+                //mostramos el elemento DOM con un intervalo de 6000ms
+                $('#d').show(6000);
+            }
+            /**
+             * Muestra el elemento y modifica su color
+             */
+            function funcion2(){
+                //mostramos el elemento con un retardo de 3s
+                $('#d').show(3000);
+                //modificamos el color del elemento
+                $("#d").css({'background-color': "red"});
+            }
+
+            /**
+             * Modifica las propiedades del elemento y llama a fadeIn
+             */
+            function funcion3(){
+                //modificamos las propiedades top y left del elemento
+                $("#d").css({'top': 300, 'left':200});
+                $("#d").fadeIn(2000);
+            }
             $(document).ready(function(){
-                $("#d").click(function(){
-    	            $("body").animate({backgroundPositionY:"300px"},3001,function() {alert ('Efecto terminado!');}),
-                    $('#d').hide(3000);
-                    $('#d').show(6000);
-                });
-                $("#d").mouseenter(function(){
-			        $('#d').show(3000);
-                    $("#d").css({'background-color': "red"});
-		        });
-                $("#d").fadeOut(3000, function(){
-                    $("#d").css({'top': 300, 'left':200});
-                    $("#d").fadeIn(1000);
-                });
+                //asignamos el evento onClick al elemento DOM de id = d asignandole la funcion funcion1()
+                $("#d").click(funcion1());
+                //asignamos el evento mouseenter al elemento DOM de id = d
+                $("#d").mouseenter(funcion2());
+                $("#d").fadeOut(3000, funcion3());
             });
         </script>
     </head>
