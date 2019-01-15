@@ -9,15 +9,17 @@
             return parseInt(Math.random()*(max-min)+min);
         }
 
-        function insertar(){
-
+        function insertar(numero){
+            alert("ok");
         }
-        
+
         $(document).ready(function(){
             $("#boton").click(function(){
                 var numero=$("#veces").prop('value');
                 if (numero>2&&numero<7){
-
+                    for (var i = 0; i < numero; i++) {
+                        insertar(intervalo(10,20));
+                    }
                 }
                 else {
                     alert("Entre 2 y 7");
