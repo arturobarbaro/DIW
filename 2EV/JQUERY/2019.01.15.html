@@ -9,17 +9,25 @@
             return parseInt(Math.random()*(max-min)+min);
         }
 
-        function insertar(numero){
-            alert("ok");
+        function insertarP(id,veces){
+            for (var i = 1; i < veces; i++) {
+                $(`#${id}`,'body').append( `<p>Parrafo ${i}</p>`);
+            }
+        }
+
+        function insertar(numero,intervalo){
+            for (var i = 1; i <= numero; i++) {
+                $('body').append( `<div id="d${i}"class="dropdown"></div>`);
+                $(`#d${i}`,'body').append( `<h1>Titulo</h1>`);
+                insertarP(`d${i}`,numero*intervalo);
+            }
         }
 
         $(document).ready(function(){
             $("#boton").click(function(){
                 var numero=$("#veces").prop('value');
                 if (numero>2&&numero<7){
-                    for (var i = 0; i < numero; i++) {
-                        insertar(intervalo(10,20));
-                    }
+                    insertar(numero,intervalo(10,20));
                 }
                 else {
                     alert("Entre 2 y 7");
