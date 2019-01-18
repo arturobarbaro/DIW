@@ -7,6 +7,9 @@
             p{
                 margin: 1px 0 1px 0;
             }
+            div{
+                border-style: groove;
+            }
         </style>
         <script src="jquery.js" type="text/javascript"></script>
         <script>
@@ -35,17 +38,25 @@
                 var numero=$("#veces").prop('value');
                 (numero>2&&numero<7)?insertar(numero,intervalo(10,20)):alert("Entre 2 y 7");
                 $('div').mouseover(function(){
-                    var ps=$('p').toArray()
+                    var ps=$('p',).toArray();
                     var lon=ps.length;
                     var pos=intervalo(0,lon);
-                    setInterval(function(){
+                    var inter=setInterval(function(){
                             pos=intervalo(0,lon);
-                            $(ps[pos]).hide(intervalo(1000,3000));
-                            $(ps[pos]).show(intervalo(1000,3000));
+                            $(ps[pos]).fadeIn(intervalo(1000,3000));
+                            $(ps[pos]).fadeOut(intervalo(1000,3000));
                     }
                     , 200);
+                    // setInterval(function(){
+                    //     $('div').mouseover(null);
+                    //     clearInterval(inter)
+                    // },2000)
+
                     //$("p").show(intervalo(1000,3000));
-                })
+                });
+                // $('div').mouseout(function(){
+                //     $('p').css("color","red");
+                // });
             })
 
         });
