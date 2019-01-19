@@ -33,26 +33,34 @@
             }
         }
 
+        function detenerIntervalo(inter){
+            $('div').off();
+            clearInterval(inter);
+            $('p').fadeIn(1);
+        }
+
+        function aparecerOcultar(elementos, pos){
+            $(elementos[pos]).fadeIn(intervalo(1000,3000));
+            $(elementos[pos]).fadeOut(intervalo(1000,3000));
+        }
+
         $(document).ready(function(){
-            $("#boton").click(function(){
+            $("#boton").on('click',function(){
                 var numero=$("#veces").prop('value');
                 (numero>2&&numero<7)?insertar(numero,intervalo(10,20)):alert("Entre 2 y 7");
-                $('div').mouseover(function(){
-                    var ps=$('p',).toArray();
+                $('div').on('mouseover',function(){
+                    var ps=$('p').toArray();
                     var lon=ps.length;
-                    var pos=intervalo(0,lon);
+                    var tiempo=100;
+                    //tiempo = 100, le resto 1 cada 200ms de forma que cuando tiempo=0 hayan transcurrido 20s
                     var inter=setInterval(function(){
-                            pos=intervalo(0,lon);
-                            $(ps[pos]).fadeIn(intervalo(1000,3000));
-                            $(ps[pos]).fadeOut(intervalo(1000,3000));
+                        tiempo-=1;
+                        if (tiempo==0) {
+                            detenerIntervalo(inter);
+                        }
+                        aparecerOcultar(ps,intervalo(0,lon));
                     }
                     , 200);
-                    // setInterval(function(){
-                    //     $('div').mouseover(null);
-                    //     clearInterval(inter)
-                    // },2000)
-
-                    //$("p").show(intervalo(1000,3000));
                 });
                 // $('div').mouseout(function(){
                 //     $('p').css("color","red");
