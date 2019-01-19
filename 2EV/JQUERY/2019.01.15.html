@@ -14,31 +14,56 @@
         <script src="jquery.js" type="text/javascript"></script>
         <script>
         // $('p').data("miData","nombre");
+        /**
+         * Funcion encargada de devolver un entero comprendido entre dos rangos
+         * @param  int  min     Valor minimo comprendido en el rango
+         * @param  int  max     Valor maximo comprendido en el rango
+         * @return int     Un numero aleatorio comprendido entre max y min.
+         */
         function intervalo(min,max){
             return parseInt(Math.random()*(max-min)+min);
         }
 
+        /**
+         * Funcion encargada de insertar un numero de parrafos
+         * @param  int  id    Identificador del padre del que insertaremos los parrafos
+         * @param  int  veces Numero de elementos p que contendra
+         */
         function insertarP(id,veces){
             for (var i = 1; i < veces; i++) {
                 $(`#${id}`,'body').append( `<p>Parrafo ${i}</p>`);
             }
         }
 
-        function insertar(numero,intervalo){
+        /**
+         * Funcion inicial encargada de insertar un numero de elementos div especificados,
+         * cada div a su vez contendran elementos hijos p.
+         * @param  int  numero  Numero de divs a insertar
+         */
+        function insertar(numero){
             for (var i = 1; i <= numero; i++) {
                 $('body').append( `<div id="d${i}"class="dropdown"></div>`);
                 $(`#d${i}`,'body').append( `<h1>Titulo</h1>`);
-                insertarP(`d${i}`,numero*intervalo);
+                insertarP(`d${i}`,numero*intervalo(10,20));
                 $("#boton").hide(1);
             }
         }
 
+        /**
+         * Funcion encargada de limpiar un intervalo y mostrar todos los parrafos del documento
+         * @param   inter   El intervalo a limpiar
+         */
         function detenerIntervalo(inter){
             $('div').off();
             clearInterval(inter);
             $('p').fadeIn(1);
         }
 
+        /**
+         * Funcion encarga de aplicar las funciones fadeIn y fadeOut a un elemento DOM
+         * @param  Array elementos    Array de elementos DOM
+         * @param  int   pos          Posicion del array para seleccionar el elemento
+         */
         function aparecerOcultar(elementos, pos){
             $(elementos[pos]).fadeIn(intervalo(1000,3000));
             $(elementos[pos]).fadeOut(intervalo(1000,3000));
@@ -47,26 +72,30 @@
         $(document).ready(function(){
             $("#boton").on('click',function(){
                 var numero=$("#veces").prop('value');
-                (numero>2&&numero<7)?insertar(numero,intervalo(10,20)):alert("Entre 2 y 7");
+                (numero>2&&numero<7)?insertar(numero):alert("Entre 2 y 7");
                 $('div').on('mouseover',function(){
+                    // $(this).on('mouseout',function(){
+                    //     $('p').css("color","red");
+                    //     tiempo=5;
+                    //     setInterval(function(){
+                    //         tiempo--;
+                    //         tiempo==0?$('div').off():'';
+                    //     }
+                    //     , 1000);
+                    //
+                    // });
                     var ps=$('p').toArray();
                     var lon=ps.length;
                     var tiempo=100;
                     //tiempo = 100, le resto 1 cada 200ms de forma que cuando tiempo=0 hayan transcurrido 20s
                     var inter=setInterval(function(){
-                        tiempo-=1;
-                        if (tiempo==0) {
-                            detenerIntervalo(inter);
-                        }
-                        aparecerOcultar(ps,intervalo(0,lon));
+                        tiempo--;
+                        tiempo==0?detenerIntervalo(inter):aparecerOcultar(ps,intervalo(0,lon));
                     }
                     , 200);
                 });
-                // $('div').mouseout(function(){
-                //     $('p').css("color","red");
-                // });
-            })
 
+            })
         });
         </script>
     </head>
