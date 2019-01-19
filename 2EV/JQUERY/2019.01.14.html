@@ -4,41 +4,73 @@
     <meta charset="utf-8">
     <title></title>
     <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        margin: 5px 0px;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 1px;
+    }
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    div form, table, h1, h2, h3, h4 {
+        display: none;
+    }
+    p, input, button,div form, table, h1, h2, h3, h4{
+        font-size: 60%;
+    }
+    form {
+        display: inline-block;
+        padding: 5px;
+    }
+    span {
+        text-align: center;
+        display: block;
+        bottom: 5px;
+        position: fixed;
+        width: 100%;
+    }
     </style>
     <script src="jquery.js" type="text/javascript"></script>
     <script>
-    // function ocultar(e){
-    //     $(this).attr("hidden","true");
-    //     $(e,"body").removeAttr("hidden","true");
-    // }
+    /**
+     * Funcion encargada de devolver un entero comprendido entre dos rangos
+     * @param  int  min     Valor minimo comprendido en el rango
+     * @param  int  max     Valor maximo comprendido en el rango
+     * @return int     Un numero aleatorio comprendido entre max y min.
+     */
+    function intervalo(min,max){
+        return parseInt(Math.random()*(max-min)+min);
+    }
 
     $(document).ready(function(){
-        function mostrar(e){
-            $(e,"body").show(1);
-        }
-        $("*","body").attr("hidden","true");
-        $("#b1","body").removeAttr("hidden","true");
-        $("#b1").click(function(e){
-            $(this).hide(1,mostrar("#b2"));
-        });
-        $("#b2").click(function(e){
-            $("button","body").show(parseInt(Math.random()*5000));
-            $(this).hide(1,mostrar("#b1"));
+        /**
+         * Funcion encargada de mostrar aquellos elementos DOM que respondan a los párrafos delformulario #2,
+         * mostrar el Botón #2 y ocultar éste (#1).
+         */
+        $('#b1').click(function(){
+            var elemento = $(this);
+            var tiempo = intervalo(1000,5000);
+            $($(this)).fadeOut(tiempo);
+            $("form[name*='form2']").fadeIn(tiempo, function(){
+                $('#b2').show();
+            });
+        })
+        /**
+         * Funcion encargada de mostrar todos los elementos, mostrar el Botón #1 y ocultar éste (#2)
+         */
+        $('#b2').click(function(){
+            var elemento = $(this);
+            var tiempo = intervalo(3000,10000);
+            $('*', 'div').fadeIn(tiempo, function(){
+                $(elemento).fadeOut(tiempo);
+                $('#b1').show();
+            });
+            $("form[name*='form2']").fadeOut(tiempo);
         });
     });
     </script>
@@ -84,7 +116,7 @@
             <button type="button" name="button">Boton 1</button>
             <button type="button" name="button">Boton 2</button>
         </form>
-        <form class="" action="index.html" method="post">
+        <form class="" name="form2" action="index.html" method="post">
             <p>Parrafo 1</p>
             <input type="text" name="" value=""></input>
             <p>Parrafo 2</p>
@@ -122,7 +154,7 @@
             <button type="button" name="button">Boton 3</button>
             <button type="button" name="button">Boton 4</button>
         </form>
-        <form class="" action="index.html" method="post">
+        <form class="" name="form2" action="index.html" method="post">
             <p>Parrafo 1</p>
             <input type="text" name="" value=""></input>
             <p>Parrafo 2</p>
@@ -148,7 +180,7 @@
             <button type="button" name="button">Boton 5</button>
             <button type="button" name="button">Boton 6</button>
         </form>
-        <form class="" action="index.html" method="post">
+        <form class="" name="form2" action="index.html" method="post">
             <p>Parrafo 1</p>
             <input type="text" name="" value=""></input>
             <p>Parrafo 2</p>

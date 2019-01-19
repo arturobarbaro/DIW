@@ -65,8 +65,9 @@
          * @param  int   pos          Posicion del array para seleccionar el elemento
          */
         function aparecerOcultar(elementos, pos){
-            $(elementos[pos]).fadeIn(intervalo(1000,3000));
-            $(elementos[pos]).fadeOut(intervalo(1000,3000));
+            $(elementos[pos]).fadeIn(intervalo(1000,3000),function(){
+                $(elementos[pos]).fadeOut(intervalo(1000,3000));
+            });
         }
 
         $(document).ready(function(){
