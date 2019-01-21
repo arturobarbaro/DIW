@@ -4,10 +4,21 @@
         <meta charset="utf-8">
         <title></title>
         <style media="screen">
-            p{
-                margin: 1px 0 1px 0;
+            p, h1{
+                margin: 0px 0 0px 0;
+                font-size: 30%;
             }
             div{
+                border-style: groove;
+                border:red 1px solid;
+                height:80%;
+                width:12%;
+                float: right;
+            }
+            #d1{
+
+            }
+            .final{
                 border-style: groove;
             }
         </style>
@@ -54,7 +65,7 @@
          * @param   inter   El intervalo a limpiar
          */
         function detenerIntervalo(inter){
-            $('div').off();
+            $(this).off();
             clearInterval(inter);
             $('p').fadeIn(1);
         }
@@ -75,16 +86,21 @@
                 var numero=$("#veces").prop('value');
                 (numero>2&&numero<7)?insertar(numero):alert("Entre 2 y 7");
                 $('div').on('mouseover',function(){
-                    // $(this).on('mouseout',function(){
-                    //     $('p').css("color","red");
-                    //     tiempo=5;
-                    //     setInterval(function(){
-                    //         tiempo--;
-                    //         tiempo==0?$('div').off():'';
-                    //     }
-                    //     , 1000);
-                    //
-                    // });
+                    var este= $(this);
+                    $(this).on('mouseout',function(){
+                        $('p',$(this)).css("color","red");
+                        tiempo=5;
+                        setInterval(function(){
+                            tiempo--;
+                            if(tiempo==0){
+                                $(this).off();
+                                $('p').fadeIn(1);
+                                $(this).attr("class","final")
+                            }
+                        }
+                        , 1000);
+
+                    });
                     var ps=$('p').toArray();
                     var lon=ps.length;
                     var tiempo=100;
