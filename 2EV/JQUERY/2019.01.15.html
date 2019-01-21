@@ -15,8 +15,12 @@
                 width:12%;
                 float: right;
             }
-            #d1{
-
+            #piePagina{
+                position: absolute;
+                border:red 1px solid;
+                height:10%;
+                width:95%;
+                bottom: 0;
             }
             .final{
                 border-style: groove;
@@ -41,7 +45,7 @@
          * @param  int  veces Numero de elementos p que contendra
          */
         function insertarP(id,veces){
-            for (var i = 1; i < veces; i++) {
+            for (var i = 1; i < 120; i++) {
                 $(`#${id}`,'body').append( `<p>Parrafo ${i}</p>`);
             }
         }
@@ -119,5 +123,6 @@
     <body>
         <input id="veces" type="number" name="" value=""></input>
         <button id="boton" type="button" name="button">Clickea</button>
+        <div id="piePagina"></div>
     </body>
 </html>
