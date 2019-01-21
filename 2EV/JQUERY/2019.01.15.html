@@ -12,7 +12,7 @@
                 border-style: groove;
                 border:red 1px solid;
                 height:80%;
-                width:12%;
+                width:15%;
                 float: right;
             }
             #piePagina{
@@ -46,7 +46,7 @@
          */
         function insertarP(id,veces){
             for (var i = 1; i < 120; i++) {
-                $(`#${id}`,'body').append( `<p>Parrafo ${i}</p>`);
+                $(`#${id}`,'body').append(`<p>Parrafo ${i}</p>`);
             }
         }
 
@@ -99,7 +99,7 @@
                             if(tiempo==0){
                                 $(this).off();
                                 $('p').fadeIn(1);
-                                $(this).attr("class","final")
+                                $(this).prop("class","final")
                             }
                         }
                         , 1000);
