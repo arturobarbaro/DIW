@@ -12,7 +12,6 @@
                 border-style: groove;
                 border:red 1px solid;
                 height:80%;
-                width:15%;
                 float: right;
             }
             #piePagina{
@@ -25,7 +24,7 @@
             .final p{
                 margin: 2px 0 2px 0;
                 font-size: 100%;
-                color: black;
+                color: red;
             }
             .final h1{
                 font-size: 100%;
@@ -33,7 +32,6 @@
         </style>
         <script src="jquery.js" type="text/javascript"></script>
         <script>
-        // $('p').data("miData","nombre");
         /**
          * Funcion encargada de devolver un entero comprendido entre dos rangos
          * @param  int  min     Valor minimo comprendido en el rango
@@ -58,14 +56,18 @@
         /**
          * Funcion inicial encargada de insertar un numero de elementos div especificados,
          * cada div a su vez contendran elementos hijos p.
-         * @param  int  numero  Numero de divs a insertar
+         * @param  int      numero        Numero de divs a insertar
+         * @param  string   porcentaje    Porcentaje para ajustar los divs al ancho de la pantalla
          */
-        function insertar(numero){
+        function insertar(numero, porcentaje){
+            $('#veces').hide(1);
             for (var i = 1; i <= numero; i++) {
                 $('body').append( `<div id="d${i}"class="dropdown"></div>`);
                 $(`#d${i}`,'body').append( `<h1>Titulo</h1>`);
                 insertarP(`d${i}`,numero*intervalo(10,20));
                 $("#boton").hide(1);
+                console.log(porcentaje);
+                $(`#d${i}`).css("width",porcentaje)
             }
         }
 
@@ -74,43 +76,59 @@
          * @param   inter   El intervalo a limpiar
          */
         function detenerIntervalo(inter){
-            $(this).off();
+            $('#piePagina').off();
             clearInterval(inter);
             $('p').fadeIn(1);
         }
 
         /**
          * Funcion encarga de aplicar las funciones fadeIn y fadeOut a un elemento DOM
+         * comprobando que la latencia de tiempo no se repita con el valor anterior.
          * @param  Array elementos    Array de elementos DOM
          * @param  int   pos          Posicion del array para seleccionar el elemento
          */
         function aparecerOcultar(elementos, pos){
-            $(elementos[pos]).fadeIn(intervalo(1000,3000),function(){
-                $(elementos[pos]).fadeOut(intervalo(1000,3000));
+            var latencia;
+            do{
+                latencia=intervalo(1000,3000);
+            } while ($(elementos[pos]).data('latencia')==latencia)
+            $(elementos[pos]).data('latencia',latencia)
+            $(elementos[pos]).fadeIn(latencia,function(){
+                $(elementos[pos]).fadeOut(latencia);
             });
         }
 
+        /**
+         * Funcion encargada de realizar los siguientes desempeños:
+         * - Los párrafos de título deben pasar a tener el 100% de tamaño y cambio a rojo.
+         * - Los eventos anteriores deben perder efecto al cabo de los 5 segundos.
+         * @param  DOM  elemento     El elemento sobre el que eliminamos los eventos asociados.
+         */
+        function resultadoFinal(elemento){
+            elemento.off('mouseover');
+            tiempo=5;
+            var interOut=setInterval(function(){
+                tiempo--;
+                elemento.off('mouseout');
+                if(tiempo<=0){
+                    detenerIntervalo(interOut);
+                    $('div').prop("class","final");
+                }
+            }
+            , 1000);
+        }
+
+        //Asignamos los eventos a los elementos DOM una vez que se ha completado la carga del documento
         $(document).ready(function(){
             $("#boton").on('click',function(){
                 var numero=$("#veces").prop('value');
-                (numero>2&&numero<7)?insertar(numero):alert("Entre 2 y 7");
+                var porcentaje=90/numero;
+                //Comprobamos que el numero esta comprendido entre 2 y 7
+                (numero>2&&numero<7)?insertar(numero,`${porcentaje}%`):alert("Entre 2 y 7");
+                //Asignamos los eventos al div de id piePagina
                 $('#piePagina').on('mouseover',function(){
                     var este=$(this)
-                    este.on('mouseout',function(){
-                        $('p','div').css("color","red");
-                        este.off('mouseover');
-                        tiempo=5;
-                        var interOut=setInterval(function(){
-                            console.log(tiempo);
-                            tiempo--;
-                            este.off('mouseout');
-                            if(tiempo<=0){
-                                detenerIntervalo(interOut);
-                                $('div').prop("class","final");
-                            }
-                        }
-                        , 1000);
-                    });
+                    este.on('mouseout', resultadoFinal(este));
                     var ps=$('p').toArray();
                     var lon=ps.length;
                     var tiempo=100;
