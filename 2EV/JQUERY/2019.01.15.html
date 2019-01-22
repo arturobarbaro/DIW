@@ -22,8 +22,13 @@
                 width:95%;
                 bottom: 0;
             }
-            .final{
-                border-style: groove;
+            .final p{
+                margin: 2px 0 2px 0;
+                font-size: 100%;
+                color: black;
+            }
+            .final h1{
+                font-size: 100%;
             }
         </style>
         <script src="jquery.js" type="text/javascript"></script>
@@ -90,20 +95,21 @@
                 var numero=$("#veces").prop('value');
                 (numero>2&&numero<7)?insertar(numero):alert("Entre 2 y 7");
                 $('div').on('mouseover',function(){
-                    var este= $(this);
-                    $(this).on('mouseout',function(){
-                        $('p',$(this)).css("color","red");
+                    var este=$(this)
+                    este.on('mouseout',function(){
+                        $('p',este).css("color","red");
+                        este.off('mouseover');
                         tiempo=5;
-                        setInterval(function(){
+                        var interOut=setInterval(function(){
+                            console.log(tiempo);
                             tiempo--;
-                            if(tiempo==0){
-                                $(this).off();
-                                $('p').fadeIn(1);
-                                $(this).prop("class","final")
+                            este.off('mouseout');
+                            if(tiempo<=0){
+                                detenerIntervalo(interOut);
+                                este.prop("class","final");
                             }
                         }
                         , 1000);
-
                     });
                     var ps=$('p').toArray();
                     var lon=ps.length;
