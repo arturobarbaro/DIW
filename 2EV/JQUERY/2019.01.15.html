@@ -94,10 +94,10 @@
             $("#boton").on('click',function(){
                 var numero=$("#veces").prop('value');
                 (numero>2&&numero<7)?insertar(numero):alert("Entre 2 y 7");
-                $('div').on('mouseover',function(){
+                $('#piePagina').on('mouseover',function(){
                     var este=$(this)
                     este.on('mouseout',function(){
-                        $('p',este).css("color","red");
+                        $('p','div').css("color","red");
                         este.off('mouseover');
                         tiempo=5;
                         var interOut=setInterval(function(){
@@ -106,7 +106,7 @@
                             este.off('mouseout');
                             if(tiempo<=0){
                                 detenerIntervalo(interOut);
-                                este.prop("class","final");
+                                $('div').prop("class","final");
                             }
                         }
                         , 1000);
