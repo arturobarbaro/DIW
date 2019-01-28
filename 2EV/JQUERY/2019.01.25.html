@@ -4,34 +4,74 @@
     <meta charset="utf-8">
     <title>2019.01.25</title>
     <style media="screen">
+        .div1{
+            border-style: groove;
+            border:red 1px solid;
+            background: #5DEAA8;
+            height: 500px;
+            width: 100%
+        }
         img{
             position: absolute;
-            /* height: 100px;
-            width: 100px; */
+            height: 150px;
+            width: 100px;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="jquery.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script>
-        $(document).ready(function(){
+        var pos=50;
+
+        /**
+        * Ordena las cartas en su posicion inicial
+        */
+        function ordenar(){
             var listado = $('img');
             var left=0;
             for (var i = 1; i <= listado.length; i++) {
-                $(`#${i}`).css('top',`300px`);
-                $(`#${i}`).css('left',`${left++*100}px`);
+                $(`#${i}`).css('top',`550px`);
+                $(`#${i}`).css('left',`${left++*50}px`);
             }
+        }
+
+        /**
+         * Comprueba que la carta a arrastrar seleccionada es valida.
+         * Si lo es guarda esta como refencia si no lo es muestra un mesaje de error
+         */
+        function comprobarPosicion(){
+            var id = this.id;
+            if ($('#d1').data('valor') > id) {
+                $(this).draggable({revert: true});
+                alert('No puede colocar una carta inferior sobre la actual');
+            }else {
+                $('#d1').data('valor',id);
+                pos+=50;
+                //$(this).draggable({revert: false});
+                $(this).css('top',`${pos}px`)
+                $(this).css('left',`${pos}px`);
+            }
+        }
+
+        $(document).ready(function(){
+            ordenar();
+            $('img').draggable();
+            $('img').on('drag', comprobarPosicion);
         });
     </script>
 </head>
 <body>
-    <img id="1" src="./imagenes/Barba Garcia, Francisco.jpg" alt="Carta">
-    <img id="2" src="./imagenes/Barba-Rodriguez,-Arturo.jpg" alt="Carta">
-    <img id="3" src="./imagenes/Caro-Bernal,-Miguel-Angel.jpg" alt="Carta">
-    <img id="4" src="./imagenes/Castillo-Pena,-José-Luis.jpg" alt="Carta">
-    <img id="5" src="./imagenes/Cruz-Vidal,-Alejandro.jpg" alt="Carta">
-    <img id="6" src="./imagenes/Gallego-Martel,-Jose-Maria.jpg" alt="Carta">
-    <img id="7" src="./imagenes/Garci-Peña,-José-Joaquín.jpg" alt="Carta">
-    <img id="8" src="./imagenes/Vazquez-Rodriguez,-Maria-del-Mar.jpg" alt="Carta">
+    <div id="d1" class="div1">
+        Coloque aqui las cartas
+    </div>
+    <div id="d2">
+        <img id="1" src="./imagenes/Barba Garcia, Francisco.jpg" alt="Carta">
+        <img id="2" src="./imagenes/Barba-Rodriguez,-Arturo.jpg" alt="Carta">
+        <img id="3" src="./imagenes/Caro-Bernal,-Miguel-Angel.jpg" alt="Carta">
+        <img id="4" src="./imagenes/Castillo-Pena,-José-Luis.jpg" alt="Carta">
+        <img id="5" src="./imagenes/Cruz-Vidal,-Alejandro.jpg" alt="Carta">
+        <img id="6" src="./imagenes/Gallego-Martel,-Jose-Maria.jpg" alt="Carta">
+        <img id="7" src="./imagenes/Garci-Peña,-José-Joaquín.jpg" alt="Carta">
+        <img id="8" src="./imagenes/Vazquez-Rodriguez,-Maria-del-Mar.jpg" alt="Carta">
+    </div>
 </body>
 </html>
