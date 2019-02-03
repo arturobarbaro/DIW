@@ -23,7 +23,7 @@
         var pos=50;
 
         /**
-        * Ordena las cartas en su posicion inicial
+        * Ordena las cartas en su posicion inicial.
         */
         function ordenar(){
             var listado = $('img');
@@ -35,26 +35,37 @@
         }
 
         /**
-         * Comprueba que la carta a arrastrar seleccionada es valida.
-         * Si lo es guarda esta como refencia si no lo es muestra un mesaje de error
+         * Comprueba que la carta a arrastrar seleccionada es válida.
+         * La condición de comprobación es comparando el id de la carta actual
+         * con el de la última carta asignada.
+         * Si no lo es muestra un mesaje de error.
          */
         function comprobarPosicion(){
             var id = this.id;
             if ($('#d1').data('valor') > id) {
                 $(this).draggable({revert: true});
                 alert('No puede colocar una carta inferior sobre la actual');
-            }else {
-                $('#d1').data('valor',id);
-                pos+=50;
-                //$(this).draggable({revert: false});
-                $(this).css('top',`${pos}px`)
-                $(this).css('left',`${pos}px`);
             }
+        }
+
+        /**
+         * Asigna una posción autoincrementada a la carta a soltar y la referencia con data()
+         * siempre que la carta seleccionada sea válida.
+         * Finalmente elimina todos los eventos asociados a esta carta.
+         */
+        function asignarPosicion(){
+            var id = this.id;
+            $('#d1').data('valor',id);
+            pos+=10;
+            $(`#${id}`).css('top',`${pos}px`)
+            $(`#${id}`).css('left',`${pos}px`);
+            $(`#${id}`).off();
         }
 
         $(document).ready(function(){
             ordenar();
             $('img').draggable();
+            $('img').on('mouseup', asignarPosicion);
             $('img').on('drag', comprobarPosicion);
         });
     </script>
