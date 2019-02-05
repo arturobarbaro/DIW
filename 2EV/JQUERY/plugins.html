@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="jquery.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            jQuery.fn.parpadea = function() {
+                this.each(function(){
+                    elem = $(this);
+                    elem.fadeOut(250, function(){
+                        $(this).fadeIn(250);
+                    });
+                });
+                return this;
+            };
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#div1').parpadea();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="div1" class="">
+            <h1>Hola, soy coque</h1>
+            <p>si dejas tu numero te pego un toque</p>
+        </div>
+    </body>
+</html>
